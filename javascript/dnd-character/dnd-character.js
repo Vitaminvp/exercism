@@ -9,6 +9,7 @@ export const abilityModifier = () => {
 
 export class Character {
   static rollAbility() {
+    return Math.floor(Math.random() +1 );
     throw new Error("Remove this statement and implement this function");
   }
 
