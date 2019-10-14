@@ -1,4 +1,4 @@
 export const gigasecond = date => {
-  const dateMs = Date.parse(date) + 10 ** 12;
+  const dateMs = date.getTime() + 1e12;
   return new Date(dateMs);
 };
