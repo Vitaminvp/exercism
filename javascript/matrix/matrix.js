@@ -1,25 +1,40 @@
 export class Matrix {
   constructor(str) {
-    this.rowsArr = str
+    this.str = str;
+  }
+
+  createRows(str) {
+    this._rowsArr = this.str
       .split("\n")
       .map(row => row.split(" ").map(item => Number(item)));
+  }
 
-    this.colsArr = new Array(this.rowsArr[0].length).fill(
-      new Array(this.rowsArr.length)
+  createCols(str) {
+    this._colsArr = new Array(this._rowsArr[0].length).fill(
+      new Array(this._rowsArr.length)
     );
-    for (let i = 0; i < this.rowsArr[0].length; i++) {
-      for (let j = 0; j < this.rowsArr.length; j++) {
-        this.colsArr[i][j] = this.rowsArr[j][i];
+    for (let i = 0; i < this._rowsArr[0].length; i++) {
+      for (let j = 0; j < this._rowsArr.length; j++) {
+        this._colsArr[i][j] = this._rowsArr[j][i];
       }
-      this.colsArr[i] = [...this.colsArr[i]];
+      this._colsArr[i] = [...this._colsArr[i]];
     }
   }
 
   get rows() {
-    return this.rowsArr;
+    if (!this._rowsArr) {
+      this.createRows(this.str);
+    }
+    return this._rowsArr;
   }
 
   get columns() {
-    return this.colsArr;
+    if (!this._colsArr) {
+      if (!this._rowsArr) {
+        this.createRows(this.str);
+      }
+      this.createCols();
+    }
+    return this._colsArr;
   }
 }
